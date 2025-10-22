@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Single-Page Application</title>
+</head>
+<body>
+<div id="total-sales"></div>
+<div id="github-created-at"></div>
+<div id="markdown-output"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/pandas@2.3"></script>
+<script>
+  // CSV Parsing Logic
+  const data = `fetch('data.csv')`; // Fetch CSV data
+  const rows = data.split('\n').filter(row => row.trim() !== '');
+  const headers = rows[0].split(',');
+  const columnIndex = headers.indexOf('column_name');
+  rows.slice(1).forEach(row => {
+    const values = row.split(',');
+    if (values[columnIndex]) {
+      // Process value
+    }
+  });
+
+  // Error Handling
+  try {
+    // Execute Python Script
+    fetch('execute.py')
+      .then(response => response.text())
+      .then(script => {
+        eval(script); // Execute Python script
+      })
+      .catch(error => console.error('Error executing Python script:', error));
+  } catch (error) {
+    console.error('An error occurred:', error);
+  }
+
+  // Debugging
+  console.log('Page loaded successfully');
+</script>
+</body>
+</html>
